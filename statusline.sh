@@ -169,8 +169,8 @@ try:
     sd = d.get("seven_day") or {}
     fh_u = fh.get("utilization")
     sd_u = sd.get("utilization")
-    fh_str = f"5h {round(100 - fh_u)}%" if fh_u is not None else "5h n/a"
-    sd_str = f"7d {round(100 - sd_u)}%" if sd_u is not None else "7d n/a"
+    fh_str = f"5h {round(fh_u)}%" if fh_u is not None else "5h n/a"
+    sd_str = f"7d {round(sd_u)}%" if sd_u is not None else "7d n/a"
     print(f"{fh_str}|{sd_str}")
 except Exception:
     print("5h n/a|7d n/a")

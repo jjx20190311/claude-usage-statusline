@@ -9,19 +9,19 @@ allowed-tools: Bash, Read, Write, Edit
 Installs a custom Claude Code statusline that displays:
 
 ```
-ctx 47% | 5h 51% | 7d 65% | $0.42 / 38k tok
+ctx 47% | 5h 59% | 7d 36% | $0.42 / 38k tok
 ```
 
-- **ctx XX%** — current context window usage (parsed from session transcript JSONL)
-- **5h XX%** — 5-hour billing window remaining (from Anthropic OAuth `usage` endpoint, same data as `/status`)
-- **7d XX%** — 7-day window remaining (same endpoint)
+- **ctx XX%** — current context window used (parsed from session transcript JSONL)
+- **5h XX%** — 5-hour billing window used (from Anthropic OAuth `usage` endpoint, matches `/status`)
+- **7d XX%** — 7-day window used (same endpoint)
 - **$X.XX / XXk tok** — session-to-date cost and total tokens (computed from transcript with hard-coded Claude pricing)
 
 ## How it works
 
 The statusline script reads:
 1. `transcript_path` from stdin JSON (Claude Code passes this on every statusline render) → context % and session cost
-2. `~/.claude/.credentials.json` for the OAuth access token → calls `https://api.anthropic.com/api/oauth/usage` for 5h/7d remaining (cached 30s)
+2. `~/.claude/.credentials.json` for the OAuth access token → calls `https://api.anthropic.com/api/oauth/usage` for 5h/7d used (cached 30s)
 
 No external dependencies (no ccusage, no npm). Pure bash + python3 + curl.
 
